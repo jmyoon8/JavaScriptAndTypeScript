@@ -12,4 +12,4 @@ console.log(`${myTodoCollection.userName}`);
 myTodoCollection.getTodoById(1)?.printDetails();
 myTodoCollection.addTodo("집에가기");
 myTodoCollection.markComplete(3, true);
-myTodoCollection.todoItems.forEach((item) => item.printDetails());
+myTodoCollection.todoItems.map((item) => item.printDetails());
