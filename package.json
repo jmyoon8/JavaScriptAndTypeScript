@@ -1,13 +1,19 @@
 {
-  "name": "node",
+  "name": "tutorial",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev":"tsc test.ts -w",
-    "transpile": "tsc test.ts"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmyoon8/nodejs_Router.git"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jmyoon8/nodejs_Router/issues"
+  },
+  "homepage": "https://github.com/jmyoon8/nodejs_Router#readme"
 }
