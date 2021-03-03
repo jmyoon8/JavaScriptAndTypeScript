@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "startTsc":"tsc -w",
+    "startJs":"nodemon build/index.js",
+    "start":"concurrently \"npm run startTsc\" \"npm run startJs\" "
   },
   "repository": {
     "type": "git",
