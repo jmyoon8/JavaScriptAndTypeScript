@@ -96,5 +96,7 @@ const createSqure=(config:SquareConfig):returnType=>{
 //여기서 항상 파라미터에 모든 프로퍼티를 포함할 필요가없다
 console.log(createSqure({color:'white'}))
 
+//읽기 전용 프로퍼티
+
 
 

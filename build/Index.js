@@ -45,27 +45,4 @@ let someValue = "this is a string";
 //때문에 string 함수를 사용하기위해  someValue를 string이라고 단언(프로그래머가 단언) 하여 함수(length)를 쓸수 있도록한다. (단언을 안하고 해도 상관없지만 그렇게되면 관련된 기능을 자동완성 할 수 없다. )
 let strLength = someValue.length; //혹은 let strLength:number(someValue as string).length 으로 as 으로 사용 할 수있다.
 console.log(strLength);
-//인터페이스 타입검사를 위한 강력한 도구 
-//아래의 경우를
-const printLabel = (lableObj) => {
-    console.log(lableObj.label);
-};
-const myObj = { size: 10, label: "size 10 object" };
-printLabel(myObj);
-// 다음과같이 파라미터의 타입을 정해 줄 수있다.
-const printLabel1 = (myObj) => {
-    console.log(myObj.label);
-};
-printLabel1(myObj);
-const createSqure = (config) => {
-    let newSqure = { color: "", area: 0 };
-    if (config.color) {
-        newSqure.color = config.color;
-    }
-    if (config.width) {
-        newSqure.area = config.width * config.width;
-    }
-    return newSqure;
-};
-//여기서 항상 파라미터에 모든 프로퍼티를 포함할 필요가없다
-console.log(createSqure({ color: 'white' }));
+
