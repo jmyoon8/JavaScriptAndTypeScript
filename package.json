@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "startTsc":"tsc -w",
-    "startJs":"nodemon build/index.js",
-    "start":"concurrently \"npm run startTsc\" \"npm run startJs\" "
+    "startTsc": "tsc -w",
+    "startJs": "nodemon build/index.js",
+    "start": "concurrently \"npm run startTsc\" \"npm run startJs\" "
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/jmyoon8/nodejs_Router/issues"
   },
-  "homepage": "https://github.com/jmyoon8/nodejs_Router#readme"
+  "homepage": "https://github.com/jmyoon8/nodejs_Router#readme",
+  "dependencies": {
+    "concurrently": "^6.2.0"
+  }
 }

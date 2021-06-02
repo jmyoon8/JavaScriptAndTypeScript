@@ -7,10 +7,11 @@ const sampleTodos:TodoItem[]=data.map(
 )
 const myTodoCollection=new TodoCollection("YJJ",sampleTodos)
  
-console.log(`${myTodoCollection.userName}`)
 myTodoCollection.getTodoById(1)?.printDetails()
 myTodoCollection.addTodo("집에가기")
 myTodoCollection.markComplete(3,true)
 myTodoCollection.todoItems.map((item)=>item.printDetails())
+
+console.log(`${myTodoCollection.userName}`)
 
  

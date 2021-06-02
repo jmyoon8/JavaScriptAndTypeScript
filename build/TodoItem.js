@@ -7,7 +7,7 @@ class TodoItem {
         this.id = id;
         this.task = task;
         this.complete = complete;
-        this.secretIdd = "boss ";
+        this.secretIdd = "boss";
         this.id = id;
         this.task = task;
         this.complete = complete;

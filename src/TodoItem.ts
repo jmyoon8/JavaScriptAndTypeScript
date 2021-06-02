@@ -6,13 +6,13 @@ class TodoItem{
     // public complete:boolean;
     public secretId: any;
     
-    public secretIdd="boss ";
+    public secretIdd="boss";
     
         
     //생성자를 통해 변수를 초기화 할수도 있다 
     //생성자의 파라미터에 접근제어자를 선언하면 프로퍼티로 인정한다.(멤버변수)
     constructor(
-            public id: number, 
+            public id: number,    
             public task: String, 
             public complete: boolean=false
         ){
