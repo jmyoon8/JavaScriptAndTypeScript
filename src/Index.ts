@@ -54,3 +54,47 @@ let strLength:number=(<string>someValue).length  //혹은 let strLength:number(s
 
 console.log(strLength)
 
+//인터페이스 타입검사를 위한 강력한 도구 
+//아래의 경우를
+const printLabel=(lableObj:{label:string})=>{
+    console.log(lableObj.label)
+}
+const myObj={size:10,label:"size 10 object"}
+
+printLabel(myObj)
+//인터페이스를 이용하면
+
+interface LabeledValue{
+    label:string
+}
+// 다음과같이 파라미터의 타입을 정해 줄 수있다.
+const printLabel1=(myObj:LabeledValue)=>{
+    console.log(myObj.label)
+}
+printLabel1(myObj)
+
+//선택적 프로퍼티(optional properties) 모든 프로퍼티가 필요한 것은 아니ㅣ 선택적으로 받을 수 있는 프로퍼티는 ?를 붙여준다.
+interface SquareConfig{
+    color?:string,
+    width?:number
+}
+interface returnType{
+    color:string,
+    area:number
+}
+const createSqure=(config:SquareConfig):returnType=>{
+    let newSqure:returnType={color:"",area:0}
+    if(config.color){
+        newSqure.color=config.color
+    }
+    if(config.width){
+        newSqure.area=config.width*config.width
+    }
+    
+    return newSqure
+}
+//여기서 항상 파라미터에 모든 프로퍼티를 포함할 필요가없다
+console.log(createSqure({color:'white'}))
+
+
+
