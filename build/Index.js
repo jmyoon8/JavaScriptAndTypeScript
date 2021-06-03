@@ -1,5 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+//npm install typescript -g
+//npm install concurrnetly -g
+//npm install nodemon -g
 // const sampleTodos:TodoItem[]=data.map(
 //     (item,index)=>new TodoItem(item.id, item.task, item.complete)
 // )
@@ -118,3 +121,59 @@ const value = () => {
 };
 value().reset(1, "d");
 console.log(value());
+///////function 의 기본형 void는 펑션의 리턴값이 없을떄 사용한다; 
+//파라미터에 ?를 주어 optional하게 파라미터를 받을 수 있다.(파라미터를 뒤에부터 입력해야한다.) 옵셔널을 넣을경우 이니셜라이져를 사용 할 수 없다.
+/////중요!!!! optional 하게 타입을 지정할경우 반듯이 if나 삼항식으로 으로 분기처리를 해야한다 안할경우 에러남
+const func = (number = 1, string) => {
+    string ? string = string : string = "";
+    return number + string;
+};
+//이니셜 라이져를 사용할경우 undefined를 넣으면 이니셜라이져의 값이 나온다
+console.log(func(undefined, "dd")); //
+//여러가지 변수를 받을때 (...arg)
+const argfunc = (param1, ...arg) => {
+    return param1 + ' ' + arg.join(' ');
+};
+console.log(argfunc("111", "111", "111", "111"));
+// let string:Easing="4" 에러발생
+const literal = (string) => {
+    // string='' 여기서 ''안에서 리터럴 타입만 자동완성이 뜬다 개꿀!
+    if (string === "1") {
+    }
+    else if (string === "2") {
+    }
+    else if (string === "3") {
+    }
+    else {
+    }
+};
+let sa = { string: '1', num: 1 };
+//유니언 타입 이미 존재하는 타입이나 인터페이스를 결합하는 방법
+const left = (value, padding) => {
+    if (typeof padding === 'number') {
+        return Array(padding + 1).join(" ") + value;
+    }
+    else if (typeof padding === 'string') {
+        return padding + value;
+    }
+    // throw new Error('ddddd')
+};
+console.log(left("dd", 4));
+console.log(left("dd", "4"));
+let letgo = {
+    let: "1",
+    go: '1',
+    out: '1'
+};
+letgo.let;
+const state = (state) => {
+    switch (state.state) {
+        case '1':
+            return '1';
+        case '2':
+            return '2';
+        case '3':
+            return '3';
+    }
+};
+console.log(state({ state: '1' }));

@@ -1,7 +1,9 @@
 import { data } from "./Data";
 import TodoCollection from "./TodoCollection";
 import TodoItem from "./TodoItem";
-
+//npm install typescript -g
+//npm install concurrnetly -g
+//npm install nodemon -g
 // const sampleTodos:TodoItem[]=data.map(
 //     (item,index)=>new TodoItem(item.id, item.task, item.complete)
 // )
@@ -15,7 +17,7 @@ import TodoItem from "./TodoItem";
 // myTodoCollection.todoItems.map((item)=>item.printDetails())
 
 
- //타입 스크립트 기본
+//타입 스크립트 기본
 //기본
  let bool:boolean=false
  let str:string = "str"
@@ -194,3 +196,113 @@ const value =():hybrid=>{
 }
 value().reset(1,"d")
 console.log(value())
+
+///////function 의 기본형 void는 펑션의 리턴값이 없을떄 사용한다; 
+//파라미터에 ?를 주어 optional하게 파라미터를 받을 수 있다.(파라미터를 뒤에부터 입력해야한다.) 옵셔널을 넣을경우 이니셜라이져를 사용 할 수 없다.
+
+/////중요!!!! optional 하게 타입을 지정할경우 반듯이 if나 삼항식으로 으로 분기처리를 해야한다 안할경우 에러남
+const func=(number:number=1,string?:string):any=>{
+    string?string=string:string="";
+    
+    return number + string
+}
+//이니셜 라이져를 사용할경우 undefined를 넣으면 이니셜라이져의 값이 나온다
+console.log(func(undefined,"dd"))//
+
+//여러가지 변수를 받을때 (...arg)
+const argfunc=(param1:string,...arg:string[]):string=>{
+    return param1+' '+arg.join(' ')
+}
+console.log(argfunc("111","111","111","111"))
+
+//리터럴 타입 들어오는 값에대한 값을 정의할수있다
+
+type Easing="1"|"2"|"3"
+// let string:Easing="4" 에러발생
+const literal =(string:Easing)=>{
+    // string='' 여기서 ''안에서 리터럴 타입만 자동완성이 뜬다 개꿀!
+    if(string==="1"){
+
+    }else if(string==="2"){
+
+    }else if(string==="3"){
+
+    }else{
+
+    }
+
+}
+//리터럴 타입은 인터페이스에서도 사용가능하다
+interface literal {
+    string:"1"|"2",
+    num:1|2|3
+}
+let sa:literal={string:'1',num:1}
+
+//유니언 타입 이미 존재하는 타입이나 인터페이스를 결합하는 방법
+const left=(value:string, padding:any)=>{
+    if(typeof padding==='number'){
+        return Array(padding+1).join(" ")+value
+    }else if(typeof padding==='string'){
+        return padding+ value
+    }
+    // throw new Error('ddddd')
+
+}
+console.log(left("dd",4))
+console.log(left("dd","4"))
+// console.log(left("dd",true))
+//위에 padding파라미터의 타입을 string | number 으로 설정해주면 typescript에서 에러를 잡아준다. error를 throw해줄 필요가 없다
+
+
+//만약 유니언 타입들의 프로퍼티가 공통된 부분이 있다면 그 부분만 접근이가능하다(확신할 수 있는 부분만 접근가능)
+interface unionA{
+    let:string,
+    go:string
+}
+
+interface unionB {
+    let:string,
+    out:string
+}
+
+let letgo:unionA|unionB={
+    let:"1",
+    go:'1',
+    out:'1'
+}
+
+letgo.let
+// letgo.go 에러가 발생한다 에러를 발생시키지 않으려면 인터페이스 들은 서로 extends 한다
+
+
+//유니언된 프로퍼티의 리터럴 타입이 서로 다를경우 입력단에서 state의 모든 리터럴을 합쳐서 골라서 받는다.
+
+interface state1{
+    state:'1'
+}
+interface state2{
+    state:'2'
+}
+interface state3{
+    state:'3'
+}
+
+type state =state1|state2|state3
+
+
+const state=(state:state1|state2|state3)=>{
+    
+    switch (state.state) {
+        case '1':
+            return '1'
+        case '2':    
+            return '2'   
+        case '3':
+            return '3'
+    }
+}
+
+
+console.log(state({state:'1'}))
+
