@@ -17,6 +17,8 @@ import TodoItem from "./TodoItem";
 // myTodoCollection.todoItems.map((item)=>item.printDetails())
 
 
+
+
 //타입 스크립트 기본
 //기본
  let bool:boolean=false
@@ -241,6 +243,7 @@ let sa:literal={string:'1',num:1}
 
 //유니언 타입 이미 존재하는 타입이나 인터페이스를 결합하는 방법
 const left=(value:string, padding:any)=>{
+    
     if(typeof padding==='number'){
         return Array(padding+1).join(" ")+value
     }else if(typeof padding==='string'){
@@ -265,15 +268,15 @@ interface unionB {
     let:string,
     out:string
 }
-
-let letgo:unionA|unionB={
+type union=unionA|unionB
+let letgo:union={
     let:"1",
     go:'1',
     out:'1'
 }
 
 letgo.let
-// letgo.go 에러가 발생한다 에러를 발생시키지 않으려면 인터페이스 들은 서로 extends 한다
+// letgo.go 에러가 발생한다 에러를 발생시키지 않으려면 인터페이스 들은 서로 extends 해야한다
 
 
 //유니언된 프로퍼티의 리터럴 타입이 서로 다를경우 입력단에서 state의 모든 리터럴을 합쳐서 골라서 받는다.
@@ -302,7 +305,118 @@ const state=(state:state1|state2|state3)=>{
             return '3'
     }
 }
-
-
 console.log(state({state:'1'}))
 
+//교차타입
+interface ErrorHandling{
+    success:boolean,
+    error?:{message:string}
+}
+interface ArtworksData{
+    artwork:{title:string}[]
+}
+interface ArtistData{
+    artists:{name:string}[]
+}
+let test:ArtistData&ErrorHandling
+test={
+    artists:[{name:'ddd'}],
+    success:false,
+    error:{message:'asd'}
+}
+
+type ArtworksResponse=ArtworksData&ErrorHandling&ArtistData;
+type ArtistResponse=ArtistData&ErrorHandling
+
+//인터페이스는 여러가지 인터페이스를 implement 할수 없지만 type은 교차타입으로 다 합칠 수 있따
+
+const handleArtistsResponse=(response:ArtistResponse)=>{
+    
+    response.artists
+    response.error
+    response.success
+    if(response.error){
+        console.error(response.error.message)
+        return
+    }
+}
+
+//정리 유니온타입은 |으로 연결된 타입/인터페이스의 공통된 프로퍼티만 접근이 가능하며 만약 공통된 부분이 리터럴 타입이면 리터럴 타입들이 합쳐진다
+
+//    교차타입 &으로 연결된 타입/인터페이스의 모든 프로퍼티에 접근이 가능하다
+
+//enum
+//이넘에 숫자를 초기화하면 그다음 프로퍼티는 자도으로 ++하여 숫자가 먹여진다 중간에 숫자를 먹이면 그전까진 0부터 먹여지다가 숫자를 먹인 다음부터 다시++되어 먹여진다
+enum numbers{
+    Up,
+    Down,
+    Left=4,
+    Right
+}
+console.log(numbers)
+/*
+위에 이넘을 찍어보면
+{
+  '1': 'Up',
+  '2': 'Down',
+  '3': 'Left',
+  '4': 'Right',
+  Up: 1,
+  Down: 2,
+  Left: 3,
+  Right: 4
+}
+으로나온다
+*/
+//사용법
+const respond=(number:string|numbers)=>{
+    return number
+}
+
+console.log(respond(numbers.Down))
+//문자 열거형
+
+enum strings{
+    Up="UP",
+    Down="DOWN",
+    Left="LEFT",
+    Right="RIGHT"
+}
+//숫자대신 stirng을 넣어 직렬화한다.
+console.log(strings)
+
+
+//제너릭을 이용하면 유연하게 타입을 받아서 지정할 수 있다 즉  사용할 타입을 나중에 지정하겠다는것
+const generic=<T>(arg:T):T=>{
+
+    return arg
+}
+generic<number>(1)
+
+//인터페이스와 제너릭함수 활용
+
+interface generic{
+    gen<T>(arg:T):T
+}
+let gen:generic={
+
+    // gen<T>(arg:T):T{
+    //     console.log(arg)
+    //     return arg
+    // },
+    gen:<T>(arg:T):T=>{
+        console.log(arg)
+        return arg
+    }
+} 
+gen.gen<number>(1)
+
+//제네릭 제약조건에서 타입 매개변수 제약된 타입으로 제너릭을 선언 할 수있다 (제약된 타입이랑 아래와 같이 설명한다)
+//T의 타입이 만약 오브잭트일경우 K의 타입을 T의 키로만 강재할수있다
+const getProperty=<T,K extends keyof T>(obj:T,key:K)=>{
+
+    console.log(obj[key])
+
+}
+//없는 키값이면(ex 'c') 에러발생
+getProperty({a:1,b:2},'a')
