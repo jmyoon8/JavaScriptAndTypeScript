@@ -420,3 +420,17 @@ const getProperty=<T,K extends keyof T>(obj:T,key:K)=>{
 }
 //없는 키값이면(ex 'c') 에러발생
 getProperty({a:1,b:2},'a')
+
+// 만약 교차타입의 배열일경우 다음과같이 타입체크를한다
+type type1 ={type1:true}
+type type2 ={type2:true}
+const array:type2[]|type1[]=[{type1:true},{type2:true}]
+
+array.map(item=>{
+  if("type1" in item){
+   // 여기서 타입은 item1으로된다.
+  }
+  if("type2" in item){
+   // 여기서 타입은 item2으로된다.
+  }
+})
