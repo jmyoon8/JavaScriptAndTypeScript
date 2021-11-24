@@ -15,6 +15,12 @@ import TodoItem from "./TodoItem";
 // myTodoCollection.markComplete(3,true)
 // myTodoCollection.todoItems.map((item)=>item.printDetails())
 
+//Type Alias와 Interface의 차이점
+//Type Alias와 Interface를 살펴보았을 때 서로 대부분의 기능을 공유하고 있습니다. 언뜻 보면 ‘둘을 왜 구분해놓았을까?’ 라고 생각하실 수도 있습니다.
+//그런데 둘의 큰 차이가 하나 있습니다. Interface는 선언 병합이 가능하지만, Type Alias는 그렇지 않습니다.
+//Interface의 선언 병합
+//Interface는 동일한 이름으로 여러 번 선언해도 컴파일 시점에 아래처럼 합칠 수 있습니다. 이런 동작을 선언 병합(Declaration Merging)이라고 합니다.
+
 //타입 스크립트 기본
 //기본
 let bool: boolean = false;
