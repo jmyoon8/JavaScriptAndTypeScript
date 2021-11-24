@@ -21,6 +21,19 @@ import TodoItem from "./TodoItem";
 //Interface의 선언 병합
 //Interface는 동일한 이름으로 여러 번 선언해도 컴파일 시점에 아래처럼 합칠 수 있습니다. 이런 동작을 선언 병합(Declaration Merging)이라고 합니다.
 
+interface Window {
+  title: string;
+}
+
+interface Window {
+  ts: import("typescript");
+}
+
+declare function getWindow(): Window;
+
+const window = getWindow();
+const src = 'const a = "Hello World"';
+window.ts.transpileModule(src, {});    // transpileModule() 메서드 사용 가능
 //타입 스크립트 기본
 //기본
 let bool: boolean = false;
